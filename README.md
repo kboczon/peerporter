@@ -75,8 +75,8 @@ tracking, no author-controlled server. Full details: [PRIVACY.md](PRIVACY.md).
 |---|---|
 | End-to-end import | **Proven on a live instance**: PT click -> `POST /api/v1/videos/imports` -> video created on the chosen channel with privacy Internal, YouTube publish date, description, tags, category and language preserved by PeerTube's own fetcher |
 | Buttons render | **Proven** on the real home feed and on Shorts cards (screenshot at native resolution) |
-| Connect + silent refresh | **Proven**: status shows a real expiry ~24 h out; token refresh path exercised |
-| `node tests/youtube-id.test.js` | all assertions pass: 17 YouTube URL cases, the 30-day duplicate window, permission-string shape against Firefox's own pattern, and static guards for the permission-call rules |
+| Connect + token refresh | **Proven**: after Connect the status row shows a real expiry about 24 h out. The refresh grant was verified separately against the API - `grant_type=refresh_token` returns a fresh access + refresh pair |
+| `node tests/youtube-id.test.js` | 30 assertions, 0 failures: 16 YouTube URL cases, the 30-day duplicate window, 4 permission-string shapes checked against Firefox's own `MatchPattern` regex, and static guards for the permission-call rules |
 | `web-ext lint` | 0 errors, 0 notices, 1 warning (`KEY_FIREFOX_ANDROID_UNSUPPORTED_BY_MIN_VERSION` - correct, this add-on is desktop-only) |
 | `node --check` | clean on `background.js`, `content.js`, `options.js`, `popup.js` |
 
@@ -118,8 +118,12 @@ npm exec --yes -- web-ext sign --api-key "$AMO_API_KEY" --artifacts-dir dist
 # where npx is installed, `npx --yes web-ext sign ...` does the same
 ```
 
-That produces `dist/peertube-tube-import-*.xpi`. The add-on id is fixed in `manifest.json`
-(`peertube-tube-import@wtools.us`), so a re-signed update replaces the old one and keeps settings.
+That produces `dist/peertube_tube_import-*.xpi` (web-ext replaces the hyphens in the add-on name). The
+add-on id is fixed in `manifest.json` (`peertube-tube-import@wtools.us`), so a re-signed update
+replaces the old one and keeps settings.
+
+To publish the listing itself (name, summary, description, permission justification, data-collection
+wording, category) see [SUBMISSION.md](SUBMISSION.md).
 
 ## Development
 
@@ -143,7 +147,9 @@ must not ship inside the add-on.
 | `options.html` / `options.js` | settings page |
 | `tests/youtube-id.test.js` | pure-logic tests plus static guards for the Firefox permission rules |
 | `icons/icon.svg` | toolbar and notification icon |
-| `PRIVACY.md`, `LICENSE` | privacy policy, MIT license |
+| `PRIVACY.md` | privacy policy (the URL AMO asks for) |
+| `LICENSE` | MIT license |
+| `SUBMISSION.md` | runbook and paste-ready texts for the AMO listing form |
 
 Permissions and why: `storage` (tokens, channel choice), `notifications` (queue feedback),
 `activeTab` (popup and shortcut import of the current tab), `<all_urls>` as **optional** - it is
