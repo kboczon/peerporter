@@ -1,12 +1,12 @@
-# PeerTube Tube Import (Firefox)
+# PeerPorter (Firefox)
 
 Puts a small **PT** button on every YouTube thumbnail. One click queues that video into your
 PeerTube channel.
 
 | | |
 |---|---|
-| Home page | https://github.com/kboczon/peertube-tube-import |
-| Issues | https://github.com/kboczon/peertube-tube-import/issues |
+| Home page | https://github.com/kboczon/peerporter |
+| Issues | https://github.com/kboczon/peerporter/issues |
 | Privacy policy | [PRIVACY.md](PRIVACY.md) |
 | License | MIT - see [LICENSE](LICENSE) |
 | Browser | Firefox 140 or newer (desktop) |
@@ -113,13 +113,13 @@ machines - it stays private and only the XPI you download is usable:
 ```bash
 # one time: create an API key at https://addons.mozilla.org/developers/credentials/
 export AMO_API_KEY='<issuer>:<secret>'
-cd ~/Projects/peertube-tube-import
+cd ~/Projects/peerporter
 npm exec --yes -- web-ext sign --api-key "$AMO_API_KEY" --artifacts-dir dist
 # where npx is installed, `npx --yes web-ext sign ...` does the same
 ```
 
-That produces `dist/peertube_tube_import-*.xpi` (web-ext replaces the hyphens in the add-on name). The
-add-on id is fixed in `manifest.json` (`peertube-tube-import@wtools.us`), so a re-signed update
+That produces `dist/peerporter-*.xpi` (web-ext replaces the hyphens in the add-on name). The
+add-on id is fixed in `manifest.json` (`peerporter@wtools.us`), so a re-signed update
 replaces the old one and keeps settings.
 
 To publish the listing itself (name, summary, description, permission justification, data-collection

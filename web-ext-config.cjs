@@ -8,6 +8,6 @@ module.exports = {
     'tests/**',
     'web-ext-config.cjs',
     'SUBMISSION.md',
-    'peertube-tube-import-*.xpi',
+    'peerporter-*.xpi',
   ],
 };

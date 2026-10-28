@@ -1,6 +1,6 @@
 # Submitting to addons.mozilla.org
 
-Package to upload: `dist/peertube_tube_import-0.1.0.zip` (built with
+Package to upload: `dist/peerporter-0.1.0.zip` (built with
 `npm exec --yes -- web-ext build --artifacts-dir dist`).
 
 Current state of the package, as measured:
@@ -10,7 +10,7 @@ Current state of the package, as measured:
 | `web-ext lint` | 0 errors, 0 notices, 1 warning (`KEY_FIREFOX_ANDROID_UNSUPPORTED_BY_MIN_VERSION`) |
 | Tests | 30 assertions, 0 failures (`node tests/youtube-id.test.js`) |
 | Files inside the zip | 12 (no `tests/`, no build output) |
-| Add-on id | `peertube-tube-import@wtools.us` (fixed in `manifest.json`) |
+| Add-on id | `peerporter@wtools.us` (fixed in `manifest.json`) |
 | Manifest description | 104 characters |
 
 ## 1. Choose how to publish
@@ -34,7 +34,7 @@ npm exec --yes -- web-ext sign --api-key "$AMO_API_KEY" --artifacts-dir dist
 
 **Name**
 
-    PeerTube Tube Import
+    PeerPorter
 
 **Platform** - Firefox. **Release channel** - Listed.
 
@@ -46,9 +46,9 @@ npm exec --yes -- web-ext sign --api-key "$AMO_API_KEY" --artifacts-dir dist
 
 **Website / Support / Privacy policy URLs**
 
-    https://github.com/kboczon/peertube-tube-import
-    https://github.com/kboczon/peertube-tube-import/issues
-    https://github.com/kboczon/peertube-tube-import/blob/main/PRIVACY.md
+    https://github.com/kboczon/peerporter
+    https://github.com/kboczon/peerporter/issues
+    https://github.com/kboczon/peerporter/blob/main/PRIVACY.md
 
 **Summary** (the short one). This is the manifest description, 104 characters:
 

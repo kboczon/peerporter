@@ -1,5 +1,5 @@
-/* PeerTube Tube Import - the button that sits on each YouTube thumbnail. */
-.ptti-btn {
+/* PeerPorter - the button that sits on each YouTube thumbnail. */
+.ptp-btn {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -20,26 +20,26 @@
   transition: opacity 120ms ease, background 120ms ease, transform 120ms ease;
 }
 
-.ptti-btn:hover,
-.ptti-btn:focus-visible {
+.ptp-btn:hover,
+.ptp-btn:focus-visible {
   opacity: 1;
   background: #f1683d;
   transform: scale(1.06);
   outline: none;
 }
 
-.ptti-btn[data-state="wait"]    { opacity: 1; background: #455a64; cursor: progress; }
-.ptti-btn[data-state="done"]    { opacity: 1; background: #2e7d32; }
-.ptti-btn[data-state="duplicate"] { opacity: 0.95; background: #1565c0; }
-.ptti-btn[data-state="error"]   { opacity: 1; background: #c62828; }
+.ptp-btn[data-state="wait"]    { opacity: 1; background: #455a64; cursor: progress; }
+.ptp-btn[data-state="done"]    { opacity: 1; background: #2e7d32; }
+.ptp-btn[data-state="duplicate"] { opacity: 0.95; background: #1565c0; }
+.ptp-btn[data-state="error"]   { opacity: 1; background: #c62828; }
 
 /* Shorts are narrow; keep the button inside the picture. */
-ytd-reel-item-renderer .ptti-btn,
-yt-image-card-view-model .ptti-btn { top: 2px; right: 2px; min-width: 20px; height: 16px; font-size: 10px; line-height: 16px; }
+ytd-reel-item-renderer .ptp-btn,
+yt-image-card-view-model .ptp-btn { top: 2px; right: 2px; min-width: 20px; height: 16px; font-size: 10px; line-height: 16px; }
 
 /* Shown only when a previous copy of this content script left buttons behind (after the add-on
    was reloaded from about:debugging). Kept simple and high-contrast: it asks for a page reload. */
-#ptti-reload-hint {
+#ptp-reload-hint {
   position: fixed;
   bottom: 16px;
   right: 16px;
@@ -55,7 +55,7 @@ yt-image-card-view-model .ptti-btn { top: 2px; right: 2px; min-width: 20px; heig
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-#ptti-reload-hint button {
+#ptp-reload-hint button {
   border: 0;
   border-radius: 4px;
   padding: 4px 8px;
@@ -65,7 +65,7 @@ yt-image-card-view-model .ptti-btn { top: 2px; right: 2px; min-width: 20px; heig
   cursor: pointer;
 }
 
-#ptti-reload-hint .ptti-reload-close {
+#ptp-reload-hint .ptp-reload-close {
   background: transparent;
   color: #bdbdbd;
   font-size: 15px;

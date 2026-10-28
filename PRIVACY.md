@@ -1,6 +1,6 @@
-# Privacy policy - PeerTube Tube Import
+# Privacy policy - PeerPorter
 
-Author: Kamil Boczon. Contact: https://github.com/kboczon/peertube-tube-import/issues
+Author: Kamil Boczon. Contact: https://github.com/kboczon/peerporter/issues
 
 ## What the extension sends, and to whom
 

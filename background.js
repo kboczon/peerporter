@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * PeerTube Tube Import - background script (Firefox MV3 event script).
+ * PeerPorter - background script (Firefox MV3 event script).
  *
  * PeerTube's REST API accepts only an "Authorization: Bearer <token>" header;
  * a session cookie is rejected with 401. So we obtain an OAuth token with the
@@ -298,14 +298,14 @@ async function notify(title, message) {
   const s = await state();
   if (s.notify === false) return;
   try {
-    await browser.notifications.create('ptti-' + Date.now(), {
+    await browser.notifications.create('ptp-' + Date.now(), {
       type: 'basic',
       iconUrl: browser.runtime.getURL('icons/icon.svg'),
       title: 'PeerTube import: ' + title,
       message: String(message || '').slice(0, 200)
     });
   } catch (e) {
-    console.debug('[PeerTube Tube Import] notification unavailable:', e);
+    console.debug('[PeerPorter] notification unavailable:', e);
   }
 }
 
@@ -357,7 +357,7 @@ browser.runtime.onMessage.addListener(async (msg) => {
     return Object.assign({ ok: true }, data || {});
   } catch (e) {
     const err = (e && e.message) ? e : { code: 'exception', message: String(e) };
-    console.warn('[PeerTube Tube Import]', msg.type, err.code, err.message);
+    console.warn('[PeerPorter]', msg.type, err.code, err.message);
     if (msg.type === 'pt:import') flashBadge('!', '#c62828');
     if (err.code === 'http_401' || err.code === 'refresh_failed' || err.code === 'not_logged_in') {
       notify('Login needed', err.message);
@@ -374,7 +374,7 @@ async function handleManualImport() {
     return Object.assign({ ok: true }, result);
   } catch (e) {
     const err = (e && e.message) ? e : { code: 'exception', message: String(e) };
-    console.warn('[PeerTube Tube Import] toolbar import failed:', err.code, err.message);
+    console.warn('[PeerPorter] toolbar import failed:', err.code, err.message);
     flashBadge('!', '#c62828');
     await notify('Import failed', err.message);
     return { ok: false, code: err.code, message: err.message };

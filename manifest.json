@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "PeerTube Tube Import",
+  "name": "PeerPorter",
   "version": "0.1.0",
   "description": "Adds an import button to every YouTube thumbnail. One click queues the video into your PeerTube channel.",
   "developer": {
     "name": "Kamil Boczon",
     "url": "https://github.com/kboczon"
   },
-  "homepage_url": "https://github.com/kboczon/peertube-tube-import",
-  "bugs_url": "https://github.com/kboczon/peertube-tube-import/issues",
+  "homepage_url": "https://github.com/kboczon/peerporter",
+  "bugs_url": "https://github.com/kboczon/peerporter/issues",
   "license": "MIT",
   "permissions": [
     "storage",
@@ -66,7 +66,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "peertube-tube-import@wtools.us",
+      "id": "peerporter@wtools.us",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [

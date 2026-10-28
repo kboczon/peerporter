@@ -1,4 +1,4 @@
-// PeerTube Tube Import - pure-logic tests. Run with:  node tests/youtube-id.test.js
+// PeerPorter - pure-logic tests. Run with:  node tests/youtube-id.test.js
 const fs = require('fs');
 const path = require('path');
 const src = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');

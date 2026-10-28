@@ -1,15 +1,15 @@
 'use strict';
 
 /*
- * PeerTube Tube Import - content script.
+ * PeerPorter - content script.
  * Puts a small button on every YouTube thumbnail. YouTube is a single page app
  * that creates and re-uses cards while you scroll, so the injection runs again
  * on a debounced MutationObserver plus YouTube's own navigation events.
  */
 
 (() => {
-  const BTN_CLASS = 'ptti-btn';
-  const HANDLED = 'pttiHandled';
+  const BTN_CLASS = 'ptp-btn';
+  const HANDLED = 'ptpHandled';
 
   // Current YouTube (2026) uses the lockup view model; the older ids are kept as
   // fallbacks so the extension keeps working on cards YouTube has not migrated.
@@ -223,19 +223,19 @@
   }
 
   function showReloadHint() {
-    if (document.getElementById('ptti-reload-hint')) return;
+    if (document.getElementById('ptp-reload-hint')) return;
     const bar = document.createElement('div');
-    bar.id = 'ptti-reload-hint';
+    bar.id = 'ptp-reload-hint';
     bar.setAttribute('role', 'status');
     const text = document.createElement('span');
-    text.textContent = 'PeerTube Tube Import was reloaded - these buttons may be from the previous copy.';
+    text.textContent = 'PeerPorter was reloaded - these buttons may be from the previous copy.';
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.textContent = 'Reload this page';
     btn.addEventListener('click', () => location.reload());
     const close = document.createElement('button');
     close.type = 'button';
-    close.className = 'ptti-reload-close';
+    close.className = 'ptp-reload-close';
     close.textContent = '\u00d7';
     close.setAttribute('aria-label', 'Dismiss');
     close.addEventListener('click', () => bar.remove());
