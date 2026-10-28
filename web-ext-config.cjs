@@ -4,5 +4,10 @@
 // add-on, and its Function use must not be reported as a finding.
 // (web-ext 8 refuses a ".js" config file, and the key is ignoreFiles, not ignore.)
 module.exports = {
-  ignoreFiles: ['tests/**', 'web-ext-config.cjs', 'peertube-tube-import-*.xpi'],
+  ignoreFiles: [
+    'tests/**',
+    'web-ext-config.cjs',
+    'SUBMISSION.md',
+    'peertube-tube-import-*.xpi',
+  ],
 };
