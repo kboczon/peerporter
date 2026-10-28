@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PeerTube Tube Import - settings</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 15px/1.5 "Segoe UI", "Roboto", sans-serif; margin: 0; padding: 24px;
+           max-width: 720px; background: light-dark(#f6f7f9, #1c1b22); color: light-dark(#1c1b22, #fbfbfe); }
+    h1 { font-size: 20px; margin: 0 0 4px; }
+    h2 { font-size: 15px; margin: 26px 0 8px; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+    p.hint { margin: 4px 0 0; font-size: 13px; opacity: .75; }
+    .card { background: light-dark(#fff, #2a2933); border: 1px solid light-dark(#dcdde1, #3a3944);
+            border-radius: 10px; padding: 16px; margin-top: 10px; }
+    label { display: block; font-size: 13px; margin: 12px 0 4px; opacity: .85; }
+    input[type=text], input[type=password], select {
+      width: 100%; box-sizing: border-box; padding: 8px 10px; font-size: 14px;
+      border: 1px solid light-dark(#c9cace, #4a4a55); border-radius: 6px;
+      background: light-dark(#fff, #1c1b22); color: inherit; }
+    button { margin-top: 14px; padding: 8px 14px; font-size: 14px; font-weight: 600;
+             border: 0; border-radius: 6px; background: #f1683d; color: #fff; cursor: pointer; }
+    button.secondary { background: light-dark(#e6e7eb, #3a3944); color: inherit; font-weight: 500; }
+    button:hover { filter: brightness(1.06); }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .row > div { flex: 1 1 200px; }
+    #status dl { display: grid; grid-template-columns: 170px 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+    #status dt { opacity: .7; } #status dd { margin: 0; font-weight: 600; word-break: break-all; }
+    #log { list-style: none; margin: 10px 0 0; padding: 0; font-size: 13px; }
+    #log li { padding: 5px 8px; border-left: 3px solid #888; margin-bottom: 4px;
+              background: light-dark(#fafafa, #23222b); word-break: break-word; }
+    #log li.ok { border-color: #2e7d32; } #log li.err { border-color: #c62828; }
+    .inline { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+    .inline label { margin: 0; }
+    code { font-family: ui-monospace, "DejaVu Sans Mono", monospace; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>PeerTube Tube Import</h1>
+  <p class="hint">Adds an <strong>PT</strong> button to every YouTube thumbnail. One click queues that video
+     into your PeerTube channel. Your password is used once to get OAuth tokens; after that the extension
+     refreshes them on its own (PeerTube refresh tokens last 28 days and are renewed on each use).</p>
+
+  <h2>Status</h2>
+  <div class="card" id="status">
+    <dl>
+      <dt>Instance</dt><dd id="s-instance">not configured</dd>
+      <dt>Logged in</dt><dd id="s-user">no</dd>
+      <dt>Access token</dt><dd id="s-token">-</dd>
+      <dt>Default channel</dt><dd id="s-channel">not chosen</dd>
+      <dt>Privacy of imports</dt><dd id="s-privacy">-</dd>
+      <dt>Network permission</dt><dd id="s-perm">-</dd>
+      <dt>Videos remembered</dt><dd id="s-imports">0</dd>
+    </dl>
+  </div>
+
+  <h2>1. Connect to your PeerTube instance</h2>
+  <div class="card">
+    <label for="instance">Instance hostname</label>
+    <input type="text" id="instance" placeholder="your.peertube.address.com" autocomplete="off" spellcheck="false">
+    <p class="hint">Grey placeholder text is not a value - type your own hostname here, for example
+       <code>youtube.wtools.us</code>.</p>
+    <div class="row">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" autocomplete="username" spellcheck="false">
+      </div>
+      <div>
+        <label for="password">Password (used once, not stored)</label>
+        <input type="password" id="password" autocomplete="current-password">
+      </div>
+    </div>
+    <button id="connect">Connect and load my channels</button>
+    <p class="hint">PeerTube needs its OAuth client pair, so the first call reads
+       <code>/api/v1/oauth-clients/local</code>, then the token comes from <code>/api/v1/users/token</code>.</p>
+  </div>
+
+  <h2>2. Default channel and import options</h2>
+  <div class="card">
+    <label for="channels">Import into this channel</label>
+    <select id="channels"><option value="">Connect first to load channels</option></select>
+    <div class="row">
+      <div>
+        <label for="privacy">Privacy of imported videos</label>
+        <select id="privacy">
+          <option value="4">Internal - signed-in users only (default)</option>
+          <option value="1">Public</option>
+          <option value="2">Unlisted</option>
+          <option value="3">Private - only you</option>
+        </select>
+      </div>
+      <div>
+        <label for="notify">Desktop notifications</label>
+        <div class="inline"><input type="checkbox" id="notify" checked> <span>notify me when an import is queued</span></div>
+      </div>
+    </div>
+    <button id="save">Save channel and options</button>
+    <button id="reload-channels" class="secondary">Reload channels</button>
+  </div>
+
+  <h2>3. Housekeeping</h2>
+  <div class="card">
+    <button id="clear-imported" class="secondary">Forget which videos were queued</button>
+    <button id="disconnect" class="secondary">Log out (delete stored tokens)</button>
+    <p class="hint">Queued videos are remembered for 30 days so a second click cannot queue the same
+      video twice. Logging out keeps the channel choice; it only removes the tokens.</p>
+  </div>
+
+  <h2>Log</h2>
+  <ul id="log"></ul>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# build artifacts
+dist/
+*.xpi
+*.zip
+node_modules/
+.web-extconfig.json

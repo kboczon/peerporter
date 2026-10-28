@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "PeerTube Tube Import",
+  "version": "0.1.0",
+  "description": "Adds an import button to every YouTube thumbnail. One click queues the video into your PeerTube channel.",
+  "developer": {
+    "name": "Kamil Boczon",
+    "url": "https://github.com/kboczon"
+  },
+  "homepage_url": "https://github.com/kboczon/peertube-tube-import",
+  "bugs_url": "https://github.com/kboczon/peertube-tube-import/issues",
+  "license": "MIT",
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab"
+  ],
+  "optional_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://m.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "Import this YouTube video into PeerTube",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon.svg",
+      "32": "icons/icon.svg",
+      "48": "icons/icon.svg"
+    }
+  },
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "import-current-tab": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Import the video in the current YouTube tab"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "peertube-tube-import@wtools.us",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "websiteContent",
+          "authenticationInfo"
+        ]
+      }
+    }
+  }
+}
